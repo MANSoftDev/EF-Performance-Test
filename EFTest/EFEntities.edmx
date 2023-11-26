@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EFEntitiesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="EFEntitiesModelStoreContainer">
+          <EntitySet Name="Address" EntityType="EFEntitiesModel.Store.Address" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Country" EntityType="EFEntitiesModel.Store.Country" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Customer" EntityType="EFEntitiesModel.Store.Customer" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Customer_Phone" EntityType="EFEntitiesModel.Store.Customer_Phone" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Phone" EntityType="EFEntitiesModel.Store.Phone" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="PhoneType" EntityType="EFEntitiesModel.Store.PhoneType" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="State" EntityType="EFEntitiesModel.Store.State" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <AssociationSet Name="FK_Address_State" Association="EFEntitiesModel.Store.FK_Address_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Address" Association="EFEntitiesModel.Store.FK_Customer_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Phone_Customer" Association="EFEntitiesModel.Store.FK_Customer_Phone_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Customer_Phone" EntitySet="Customer_Phone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Phone_Phone" Association="EFEntitiesModel.Store.FK_Customer_Phone_Phone">
+            <End Role="Phone" EntitySet="Phone" />
+            <End Role="Customer_Phone" EntitySet="Customer_Phone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Phone_PhoneType" Association="EFEntitiesModel.Store.FK_Phone_PhoneType">
+            <End Role="PhoneType" EntitySet="PhoneType" />
+            <End Role="Phone" EntitySet="Phone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Country" Association="EFEntitiesModel.Store.FK_State_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="State" EntitySet="State" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Street" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="City" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="State_ID" Type="int" Nullable="false" />
+          <Property Name="PostalCode" Type="nvarchar" Nullable="false" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FName" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="LName" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="Address_ID" Type="int" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Customer_Phone">
+          <Key>
+            <PropertyRef Name="Customer_ID" />
+            <PropertyRef Name="Phone_ID" />
+          </Key>
+          <Property Name="Customer_ID" Type="int" Nullable="false" />
+          <Property Name="Phone_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="Type_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PhoneType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Country_ID" Type="int" Nullable="false" />
+          <Property Name="Abbr" Type="nchar" MaxLength="2" />
+        </EntityType>
+        <Association Name="FK_Address_State">
+          <End Role="State" Type="EFEntitiesModel.Store.State" Multiplicity="1" />
+          <End Role="Address" Type="EFEntitiesModel.Store.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="State">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Address">
+              <PropertyRef Name="State_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Address">
+          <End Role="Address" Type="EFEntitiesModel.Store.Address" Multiplicity="1" />
+          <End Role="Customer" Type="EFEntitiesModel.Store.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Address_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Phone_Customer">
+          <End Role="Customer" Type="EFEntitiesModel.Store.Customer" Multiplicity="1" />
+          <End Role="Customer_Phone" Type="EFEntitiesModel.Store.Customer_Phone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer_Phone">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Phone_Phone">
+          <End Role="Phone" Type="EFEntitiesModel.Store.Phone" Multiplicity="1" />
+          <End Role="Customer_Phone" Type="EFEntitiesModel.Store.Customer_Phone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phone">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Customer_Phone">
+              <PropertyRef Name="Phone_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Phone_PhoneType">
+          <End Role="PhoneType" Type="EFEntitiesModel.Store.PhoneType" Multiplicity="1" />
+          <End Role="Phone" Type="EFEntitiesModel.Store.Phone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhoneType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Phone">
+              <PropertyRef Name="Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_State_Country">
+          <End Role="Country" Type="EFEntitiesModel.Store.Country" Multiplicity="1" />
+          <End Role="State" Type="EFEntitiesModel.Store.State" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="State">
+              <PropertyRef Name="Country_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EFEntitiesModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Entities">
+          <EntitySet Name="Address" EntityType="EFEntitiesModel.Address" />
+          <EntitySet Name="Country" EntityType="EFEntitiesModel.Country" />
+          <EntitySet Name="Customer" EntityType="EFEntitiesModel.Customer" />
+          <EntitySet Name="Phone" EntityType="EFEntitiesModel.Phone" />
+          <EntitySet Name="PhoneType" EntityType="EFEntitiesModel.PhoneType" />
+          <EntitySet Name="State" EntityType="EFEntitiesModel.State" />
+          <AssociationSet Name="FK_Address_State" Association="EFEntitiesModel.FK_Address_State">
+            <End Role="State" EntitySet="State" />
+            <End Role="Address" EntitySet="Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Address" Association="EFEntitiesModel.FK_Customer_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_State_Country" Association="EFEntitiesModel.FK_State_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="State" EntitySet="State" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Phone_PhoneType" Association="EFEntitiesModel.FK_Phone_PhoneType">
+            <End Role="PhoneType" EntitySet="PhoneType" />
+            <End Role="Phone" EntitySet="Phone" />
+          </AssociationSet>
+          <AssociationSet Name="Customer_Phone" Association="EFEntitiesModel.Customer_Phone">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Phone" EntitySet="Phone" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Street" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="State" Relationship="EFEntitiesModel.FK_Address_State" FromRole="Address" ToRole="State" />
+          <NavigationProperty Name="Customer" Relationship="EFEntitiesModel.FK_Customer_Address" FromRole="Address" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="State" Relationship="EFEntitiesModel.FK_State_Country" FromRole="Country" ToRole="State" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="FName" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="LName" Type="String" Nullable="false" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Address" Relationship="EFEntitiesModel.FK_Customer_Address" FromRole="Customer" ToRole="Address" />
+          <NavigationProperty Name="Phone" Relationship="EFEntitiesModel.Customer_Phone" FromRole="Customer" ToRole="Phone" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="PhoneType" Relationship="EFEntitiesModel.FK_Phone_PhoneType" FromRole="Phone" ToRole="PhoneType" />
+          <NavigationProperty Name="Customer" Relationship="EFEntitiesModel.Customer_Phone" FromRole="Phone" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="PhoneType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Phone" Relationship="EFEntitiesModel.FK_Phone_PhoneType" FromRole="PhoneType" ToRole="Phone" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Abbr" Type="String" MaxLength="2" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Address" Relationship="EFEntitiesModel.FK_Address_State" FromRole="State" ToRole="Address" />
+          <NavigationProperty Name="Country" Relationship="EFEntitiesModel.FK_State_Country" FromRole="State" ToRole="Country" />
+        </EntityType>
+        <Association Name="FK_Address_State">
+          <End Role="State" Type="EFEntitiesModel.State" Multiplicity="1" />
+          <End Role="Address" Type="EFEntitiesModel.Address" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Customer_Address">
+          <End Role="Address" Type="EFEntitiesModel.Address" Multiplicity="1" />
+          <End Role="Customer" Type="EFEntitiesModel.Customer" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_State_Country">
+          <End Role="Country" Type="EFEntitiesModel.Country" Multiplicity="1" />
+          <End Role="State" Type="EFEntitiesModel.State" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Phone_PhoneType">
+          <End Role="PhoneType" Type="EFEntitiesModel.PhoneType" Multiplicity="1" />
+          <End Role="Phone" Type="EFEntitiesModel.Phone" Multiplicity="*" />
+        </Association>
+        <Association Name="Customer_Phone">
+          <End Role="Customer" Type="EFEntitiesModel.Customer" Multiplicity="*" />
+          <End Role="Phone" Type="EFEntitiesModel.Phone" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EFEntitiesModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Address">
+            <EntityTypeMapping TypeName="IsTypeOf(EFEntitiesModel.Address)">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country">
+            <EntityTypeMapping TypeName="IsTypeOf(EFEntitiesModel.Country)">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="IsTypeOf(EFEntitiesModel.Customer)">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phone">
+            <EntityTypeMapping TypeName="IsTypeOf(EFEntitiesModel.Phone)">
+              <MappingFragment StoreEntitySet="Phone">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhoneType">
+            <EntityTypeMapping TypeName="IsTypeOf(EFEntitiesModel.PhoneType)">
+              <MappingFragment StoreEntitySet="PhoneType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="State">
+            <EntityTypeMapping TypeName="IsTypeOf(EFEntitiesModel.State)">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Abbr" ColumnName="Abbr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_Address_State" TypeName="EFEntitiesModel.FK_Address_State" StoreEntitySet="Address">
+            <EndProperty Name="State">
+              <ScalarProperty Name="ID" ColumnName="State_ID" />
+            </EndProperty>
+            <EndProperty Name="Address">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Customer_Address" TypeName="EFEntitiesModel.FK_Customer_Address" StoreEntitySet="Customer">
+            <EndProperty Name="Address">
+              <ScalarProperty Name="ID" ColumnName="Address_ID" />
+            </EndProperty>
+            <EndProperty Name="Customer">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_State_Country" TypeName="EFEntitiesModel.FK_State_Country" StoreEntitySet="State">
+            <EndProperty Name="Country">
+              <ScalarProperty Name="ID" ColumnName="Country_ID" />
+            </EndProperty>
+            <EndProperty Name="State">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Phone_PhoneType" TypeName="EFEntitiesModel.FK_Phone_PhoneType" StoreEntitySet="Phone">
+            <EndProperty Name="PhoneType">
+              <ScalarProperty Name="ID" ColumnName="Type_ID" />
+            </EndProperty>
+            <EndProperty Name="Phone">
+              <ScalarProperty Name="ID" ColumnName="ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Customer_Phone" TypeName="EFEntitiesModel.Customer_Phone" StoreEntitySet="Customer_Phone">
+            <EndProperty Name="Customer">
+              <ScalarProperty Name="ID" ColumnName="Customer_ID" />
+            </EndProperty>
+            <EndProperty Name="Phone">
+              <ScalarProperty Name="ID" ColumnName="Phone_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <DesignerInfoPropertySet xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="EFEntities" xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+        <EntityTypeShape EntityType="EFEntitiesModel.Address" Width="1.5" PointX="7.625" PointY="3.375" Height="2.1725878906250005" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFEntitiesModel.Country" Width="1.5" PointX="10" PointY="6" Height="1.5956835937500002" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFEntitiesModel.Customer" Width="1.5" PointX="7.5" PointY="0.875" Height="2.1725878906250005" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFEntitiesModel.Phone" Width="1.5" PointX="9.75" PointY="1.125" Height="1.7879850260416665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFEntitiesModel.PhoneType" Width="1.5" PointX="9.875" PointY="3.625" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="EFEntitiesModel.State" Width="1.5" PointX="7.625" PointY="6.125" Height="1.9802864583333335" IsExpanded="true" />
+        <AssociationConnector Association="EFEntitiesModel.FK_Address_State" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.375" PointY="6.125" />
+          <ConnectorPoint PointX="8.375" PointY="5.5475878906250005" />
+          </AssociationConnector>
+        <AssociationConnector Association="EFEntitiesModel.FK_Customer_Address" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.3125" PointY="3.375" />
+          <ConnectorPoint PointX="8.3125" PointY="3.0475878906250005" /></AssociationConnector>
+        <AssociationConnector Association="EFEntitiesModel.FK_State_Country" ManuallyRouted="false">
+          <ConnectorPoint PointX="10" PointY="6.860341796875" />
+          <ConnectorPoint PointX="9.125" PointY="6.860341796875" />
+          </AssociationConnector>
+        <AssociationConnector Association="EFEntitiesModel.FK_Phone_PhoneType" ManuallyRouted="false">
+          <ConnectorPoint PointX="10.5625" PointY="3.625" />
+          <ConnectorPoint PointX="10.5625" PointY="2.9129850260416665" />
+          </AssociationConnector>
+        <AssociationConnector Association="EFEntitiesModel.Customer_Phone" ManuallyRouted="false">
+          <ConnectorPoint PointX="9" PointY="2.0189925130208333" />
+          <ConnectorPoint PointX="9.75" PointY="2.0189925130208333" /></AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

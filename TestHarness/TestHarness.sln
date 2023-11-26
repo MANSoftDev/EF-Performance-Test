@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness", "TestHarness.csproj", "{2B6A8753-FFFE-49D8-A28E-9B30671EBC0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFTest", "..\EFTest\EFTest.csproj", "{2ACD9703-F116-4FDF-B244-3B119C5CF97A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADOTest", "..\ADOTest\ADOTest.csproj", "{2F068C89-8331-4304-8419-3129FE6E0BCC}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2010:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = TestHarness.csproj
+		SccLocalPath1 = .
+		SccProjectUniqueName2 = ..\\EFTest\\EFTest.csproj
+		SccProjectName2 = ../EFTest
+		SccLocalPath2 = ..\\EFTest
+		SccProjectUniqueName3 = ..\\ADOTest\\ADOTest.csproj
+		SccProjectName3 = ../ADOTest
+		SccLocalPath3 = ..\\ADOTest
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B6A8753-FFFE-49D8-A28E-9B30671EBC0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B6A8753-FFFE-49D8-A28E-9B30671EBC0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B6A8753-FFFE-49D8-A28E-9B30671EBC0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B6A8753-FFFE-49D8-A28E-9B30671EBC0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ACD9703-F116-4FDF-B244-3B119C5CF97A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ACD9703-F116-4FDF-B244-3B119C5CF97A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ACD9703-F116-4FDF-B244-3B119C5CF97A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ACD9703-F116-4FDF-B244-3B119C5CF97A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F068C89-8331-4304-8419-3129FE6E0BCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F068C89-8331-4304-8419-3129FE6E0BCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F068C89-8331-4304-8419-3129FE6E0BCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F068C89-8331-4304-8419-3129FE6E0BCC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
